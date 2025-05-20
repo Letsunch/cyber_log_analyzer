@@ -1,0 +1,13 @@
+Cybersecurity Log Analysis Report
+========================================
+
+Total Records: 171380
+Anomalies Detected: 0
+
+Top Suspicious IPs:
+Series([], Name: count, dtype: int64)
+
+Sample Anomalies:
+Empty DataFrame
+Columns: [generated, appName, totalSourceBytes, totalDestinationBytes, totalDestinationPackets, totalSourcePackets, sourcePayloadAsBase64, sourcePayloadAsUTF, destinationPayloadAsBase64, destinationPayloadAsUTF, direction, sourceTCPFlagsDescription, destinationTCPFlagsDescription, source, protocolName, sourcePort, destination, destinationPort, startDateTime, stopDateTime, Label]
+Index: []

@@ -1,16 +1,14 @@
-from matplotlib.backends.backend_pdf import PdfPages
-import matplotlib.pyplot as plt
-from config import OUTPUT_DIR, REPORT_NAME
+import pandas as pd
 
-def generate_report(df, df_anomalies):
-    with PdfPages(f"{OUTPUT_DIR}{REPORT_NAME}") as pdf:
-        for img in ["traffic_over_time.png", "top_ips.png", "brute_force_ips.png"]:
-            try:
-                img_path = f"{OUTPUT_DIR}{img}"
-                fig = plt.figure()
-                plt.imshow(plt.imread(img_path))
-                plt.axis('off')
-                pdf.savefig(fig)
-                plt.close()
-            except FileNotFoundError:
-                continue
+def generate_report(df, anomalies, output_path="outputs/report_summary.txt"):
+    with open(output_path, "w") as f:
+        f.write("Cybersecurity Log Analysis Report\n")
+        f.write("="*40 + "\n\n")
+        f.write(f"Total Records: {len(df)}\n")
+        f.write(f"Anomalies Detected: {len(anomalies)}\n\n")
+        f.write("Top Suspicious IPs:\n")
+        f.write(str(anomalies['source'].value_counts().head()))
+        f.write("\n\nSample Anomalies:\n")
+        f.write(str(anomalies.head()))
+
+    print(f"\n✅ Report saved to {output_path}")

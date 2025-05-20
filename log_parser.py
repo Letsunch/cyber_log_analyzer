@@ -1,15 +1,14 @@
 import pandas as pd
-import re
-from datetime import datetime
 
 def parse_logs(filepath):
-    pattern = re.compile(r'(?P<ip>\S+) - - \[(?P<datetime>.*?)\] "(?P<method>\S+) (?P<url>\S+) (?P<protocol>\S+)" (?P<status>\d{3}) (?P<size>\d+)')
-    rows = []
-    with open(filepath, 'r') as f:
-        for line in f:
-            match = pattern.match(line)
-            if match:
-                row = match.groupdict()
-                row['datetime'] = datetime.strptime(row['datetime'], "%d/%b/%Y:%H:%M:%S %z")
-                rows.append(row)
-    return pd.DataFrame(rows)
+    """
+    Parses CIC-style CSV logs and returns a DataFrame with cleaned datetime columns.
+    """
+    df = pd.read_csv(filepath, low_memory=False)
+
+    # Parse datetime fields if they exist
+    for col in ['startDateTime', 'stopDateTime']:
+        if col in df.columns:
+            df[col] = pd.to_datetime(df[col], errors='coerce')
+
+    return df
