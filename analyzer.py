@@ -1,26 +1,11 @@
 from config import BRUTE_FORCE_THRESHOLD
 
-def detect_anomalies(df):
-    if 'Label' not in df.columns or 'source' not in df.columns:
-        print("Required columns are missing.")
-        return df.head(0)  # Empty DataFrame if structure is wrong
-
-    # Define attack keywords to filter
-    attack_keywords = ['Brute', 'DDoS', 'XSS', 'Infiltration', 'Botnet', 'SQL', 'Heartbleed', 'PortScan']
-
-    # Combine into one regex pattern
-    attack_pattern = '|'.join(attack_keywords)
-
-    # Filter suspected attack rows
-    suspected_attacks = df[df['Label'].str.contains(attack_pattern, case=False, na=False)]
-
-    # Count attacks per source IP
-    counts = suspected_attacks['source'].value_counts()
-
-    # Flag IPs with too many suspicious actions
-    attackers = counts[counts > BRUTE_FORCE_THRESHOLD].index
-
-    # Return full records of the attackers
-    anomalies = df[df['source'].isin(attackers)]
-
+def detect_brute_force(df):
+    brute_force_attempts = df[
+        (df['Label'].str.contains("Brute Force", na=False)) |
+        ((df['destinationPort'] == 22) | (df['destinationPort'] == 23))  # SSH/Telnet
+    ]
+    src_counts = brute_force_attempts['source'].value_counts()
+    top_attackers = src_counts[src_counts > BRUTE_FORCE_THRESHOLD].index
+    anomalies = brute_force_attempts[brute_force_attempts['source'].isin(top_attackers)]
     return anomalies
