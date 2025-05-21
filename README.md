@@ -1,5 +1,5 @@
 # README.md
-"""
+
 # Cybersecurity Log Analyzer
 
 This is a lightweight Python-based tool to analyze web server access logs, detect anomalies (like brute-force attacks), generate visualizations, and create PDF reports.
@@ -32,4 +32,4 @@ python main.py
 - pandas
 - seaborn
 
-"""
+
