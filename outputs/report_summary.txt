@@ -2,7 +2,7 @@ Cybersecurity Log Analysis Report
 ========================================
 
 Total Records: 171380
-Anomalies Detected: 1073
+Anomalies Detected: 897
 
 Top Suspicious IPs:
 source
@@ -10,15 +10,15 @@ source
 192.168.2.112       36
 192.168.4.118       28
 192.168.3.117       28
-192.168.3.116       28
+192.168.3.115       28
 Name: count, dtype: int64
 
 Sample Anomalies:
-          generated appName  ...     stopDateTime   Label
-39  3/11/2014 18:21     SSH  ...  6/13/2010 23:59  Normal
-40  3/11/2014 18:21     SSH  ...  6/13/2010 23:59  Normal
-41  3/11/2014 18:21     SSH  ...  6/13/2010 23:59  Normal
-46  3/11/2014 18:21     SSH  ...  6/13/2010 23:59  Normal
-52  3/11/2014 18:21     SSH  ...  6/13/2010 23:59  Normal
+          generated appName  totalSourceBytes  totalDestinationBytes  totalDestinationPackets  ...    destination destinationPort    startDateTime     stopDateTime   Label
+39  3/11/2014 18:21     SSH              2458                   7790                       50  ...  192.168.5.122              22  6/13/2010 23:59  6/13/2010 23:59  Normal
+41  3/11/2014 18:21     SSH              2586                   7534                       46  ...  192.168.5.122              22  6/13/2010 23:59  6/13/2010 23:59  Normal
+46  3/11/2014 18:21     SSH              2522                   7790                       50  ...  192.168.5.122              22  6/13/2010 23:59  6/13/2010 23:59  Normal
+52  3/11/2014 18:21     SSH              2458                   7790                       50  ...  192.168.5.122              22  6/13/2010 23:59  6/13/2010 23:59  Normal
+53  3/11/2014 18:21     SSH              2650                  15222                       54  ...  192.168.5.122              22  6/13/2010 23:59  6/13/2010 23:59  Normal
 
 [5 rows x 21 columns]
